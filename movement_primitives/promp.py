@@ -161,7 +161,7 @@ class ProMP:
         return conditional_promp
 
     def mean_trajectory(self, T):
-        """Get mean trajectory of ProMP.
+        """Get mean trajectory of ProMP. 获取 ProMP 的平均轨迹
 
         Parameters
         ----------
@@ -323,7 +323,7 @@ class ProMP:
             Minimum delta between means to continue iteration
 
         verbose : int, optional (default: 0)
-            Verbosity level
+            Verbosity level 动词级别
 
         References
         ----------

@@ -47,8 +47,8 @@ def load_lasa(shape_idx):
         Time between steps
 
     shape_name : string
-        Name of the Matlab file from which we load the demonstrations
-        (without suffix).
+        Name of the Matlab file from which we load the demonstrations 演示
+        (without suffix). suffix:后缀
 
     References
     ----------

@@ -6,6 +6,9 @@ Two Coupled 1D DMPs
 Two 1D DMPs are spatially coupled with a virtual spring that forces them to
 keep a distance. One of them is the leader DMP and the other one is the
 follower DMP.
+两个一维 DMP 在空间上通过虚拟弹簧耦合，迫使它们保持距离。
+保持一定距离。其中一个是领跑者 DMP，另一个是
+跟随者 DMP。
 """
 print(__doc__)
 

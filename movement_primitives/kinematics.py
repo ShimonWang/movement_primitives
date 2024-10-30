@@ -114,21 +114,21 @@ class Kinematics:
         Parameters
         ----------
         joint_names : list
-            Names of joints that should be used
+            Names of joints that should be used  # joints:关节
 
         base_frame : str
             Name of the base link
 
         ee_frame : str
-            Name of the end-effector link
+            Name of the end-effector link  # end-effector:末端执行器
 
         verbose : int, optional (default: 0)
-            Verbosity level
+            Verbosity level  # 动词等级？
 
         Returns
         -------
         chain : Chain
-            Kinematic chain
+            Kinematic chain  # 运动链
         """
         return Chain(self.tm, joint_names, base_frame, ee_frame, verbose)
 
@@ -429,7 +429,7 @@ class Chain:
             Desired end-effector poses.
 
         initial_joint_angles : array-like, shape (n_joints,), optional (default: None)
-            Initial guess for joint angles.
+            Initial guess for joint angles.  # 关节角初始值
 
         interval : float
             We will search for a solution within the range

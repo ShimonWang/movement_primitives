@@ -7,6 +7,10 @@ Probabilistic Movement Primitives (ProMPs) define distributions over
 trajectories that can be conditioned on viapoints. In this example, we
 plot the resulting posterior distribution after conditioning on varying
 start positions.
+概率运动基元（ProMPs）定义了可以以 viapoint 为条件的轨迹分布。
+在本例中，我们
+绘制了以不同起始位置为条件的后验分布图。
+起始位置。
 """
 print(__doc__)
 
