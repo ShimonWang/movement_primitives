@@ -6,7 +6,7 @@ from ._canonical_system import canonical_system_alpha, phase
 
 
 class StateFollowingDMP(WeightParametersMixin, DMPBase):
-    """State following DMP (highly experimental).
+    """State following DMP (highly experimental).  # 跟随DMP状态（高度实验性）
 
     The DMP variant that is implemented here is described in [1]_.
 

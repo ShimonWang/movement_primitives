@@ -1,11 +1,13 @@
 """
 ========================
 Obstacle Avoidance in 2D
+二维避障
 ========================
 
 Plots a 2D DMP that goes through a point obstacle when there is no coupling
 term for obstacle avoidance and a 2D DMP that avoids the point obstacle with
 a coupling term.
+绘制在没有避障耦合项的情况下穿过点障碍物的二维 DMP 图，以及在有耦合项的情况下避开点障碍物的二维 DMP 图。
 """
 print(__doc__)
 
@@ -15,14 +17,17 @@ import numpy as np
 from movement_primitives.dmp import DMP, CouplingTermObstacleAvoidance2D
 
 
+# 设置参数
 execution_time = 1.0
 start_y = np.zeros(2)
 goal_y = np.ones(2)
 
+# 创建DMP对象
 dmp = DMP(n_dims=2, execution_time=execution_time, n_weights_per_dim=3)
 dmp.configure(start_y=start_y, goal_y=goal_y)
 dmp.set_weights(np.array([-50.0, 100.0, 300.0, -200.0, -200.0, -200.0]))
 
+# 绘图
 fig = plt.figure()
 ax = fig.add_subplot(111)
 ax.set_xlabel("x")

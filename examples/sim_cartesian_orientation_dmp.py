@@ -1,10 +1,12 @@
 """
 ========================
 Simulate a Cartesian DMP
+模拟笛卡尔 DMP
 ========================
 
 A Cartesian DMP is used to represent a Cartesian trajectory given by positions
 and quaternions.
+笛卡尔 DMP 用于表示由位置和四元数给出的笛卡尔轨迹。
 """
 print(__doc__)
 
@@ -16,9 +18,11 @@ from movement_primitives.testing.simulation import UR5Simulation
 from pytransform3d import rotations as pr
 
 
+# 设置参数
 dt = 0.001
 execution_time = 1.0
 
+# 创建DMP对象
 dmp = CartesianDMP(
     execution_time=execution_time, dt=dt,
     n_weights_per_dim=10, int_dt=0.0001)
@@ -51,6 +55,7 @@ dP = np.asarray(desired_positions)
 V = np.asarray(velocities)
 dV = np.asarray(desired_velocities)
 
+# 绘图
 plot_dim = 5
 plt.plot(T, Y[:, plot_dim], label="Demo")
 plt.scatter([[0, T[-1]]], [[Y[0, plot_dim], Y[-1, plot_dim]]])

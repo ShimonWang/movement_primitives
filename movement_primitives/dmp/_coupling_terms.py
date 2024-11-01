@@ -407,7 +407,7 @@ class CouplingTermDualCartesianPose:
     Parameters
     ----------
     desired_distance : array, shape (4, 4)
-        Desired distance between components.
+        Desired distance between components.  # omponents:组件
 
     lf : array-like, shape (2,)
         Binary values that indicate which DMP(s) will be adapted.
@@ -420,10 +420,10 @@ class CouplingTermDualCartesianPose:
         relation can be determined by a higher-level planner [..].
 
     couple_position : bool, optional (default: True)
-        Couple position between components.
+        Couple position between components. # Couple:耦合
 
     couple_orientation : bool, optional (default: True)
-        Couple orientation between components.
+        Couple orientation between components.  # 耦合位置的虚拟弹簧常数
 
     k : float, optional (default: 1)
         Virtual spring constant that couples the positions.

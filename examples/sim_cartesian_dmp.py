@@ -1,10 +1,12 @@
 """
 =================================
 Simulate a DMP in Cartesian Space
+在笛卡尔空间中模拟DMP
 =================================
 
 A normal DMP is used to represent a Cartesian trajectory given by positions
 and quaternions.
+正常 DMP 用于表示由位置和四元数给出的笛卡尔轨迹。
 """
 print(__doc__)
 
@@ -15,9 +17,11 @@ from movement_primitives.dmp import DMP
 from movement_primitives.testing.simulation import UR5Simulation
 
 
+# 设置参数
 dt = 0.01
 execution_time = 1.0
 
+# 创建DMP对象
 dmp = DMP(n_dims=7, execution_time=execution_time, dt=dt,
           n_weights_per_dim=10, int_dt=0.01, p_gain=2.5)
 Y = np.zeros((1001, 7))
@@ -30,6 +34,7 @@ Y[:, 4] = 1.0
 dmp.imitate(T, Y)
 dmp.configure(start_y=Y[0], goal_y=Y[-1])
 
+# UR5仿真
 ur5 = UR5Simulation(dt=dt, real_time=False)
 for _ in range(4):
     ur5.goto_ee_state(Y[0], wait_time=1.0)
@@ -43,6 +48,7 @@ dP = np.asarray(desired_positions)
 V = np.asarray(velocities)
 dV = np.asarray(desired_velocities)
 
+# 绘图
 plot_dim = 1
 plt.plot(Y[:, plot_dim], label="Demo")
 plt.scatter([[0, len(Y)]], [[Y[0, plot_dim], Y[-1, plot_dim]]])

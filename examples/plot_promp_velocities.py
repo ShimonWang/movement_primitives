@@ -1,9 +1,11 @@
 """
 =====================
 Velocities of a ProMP
+ProMP 的速度
 =====================
 
 ProMPs can generate positions and velocities of a trajectory.
+ProMP 可以生成轨迹的位置和速度。
 """
 print(__doc__)
 
@@ -13,20 +15,22 @@ from movement_primitives.promp import ProMP
 import matplotlib.pyplot as plt
 
 
+# 参数设置
 n_weights_per_dim = 100
 
+# 创建ProMP对象
 promp = ProMP(n_dims=1, n_weights_per_dim=n_weights_per_dim)
 
 random_state = np.random.RandomState(10)
 n_demos = 10
 n_steps = 101
 T = np.empty((n_demos, n_steps))
-T[:, :] = np.linspace(0.0, 1.0, n_steps)
+T[:, :] = np.linspace(0.0, 1.0, n_steps)  # 全部行替换为linspace生成的序列
 Y = np.empty((n_demos, n_steps, 1))
 for demo_idx in range(n_demos):
     Y[demo_idx] = np.cos(2 * np.pi * T[demo_idx] + random_state.randn() * 0.1)[:, np.newaxis]
     Y[demo_idx, :, 0] += random_state.randn(n_steps) * 0.01
-promp.imitate(T, Y, verbose=1)
+promp.imitate(T, Y, verbose=1)  # verbose:Verbosity level
 
 random_state = np.random.RandomState(0)
 samples = promp.sample_trajectories(T[0], 10, random_state)

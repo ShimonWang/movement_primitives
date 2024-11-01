@@ -1,9 +1,11 @@
 """
 =============================
 Simulate Spring-Damper System
+模拟弹簧阻尼系统
 =============================
 
 A spring-damper system is used to control the Cartesian pose of a robot arm.
+弹簧阻尼系统用于控制机械臂的笛卡尔姿态。
 """
 print(__doc__)
 
@@ -14,6 +16,7 @@ from movement_primitives.spring_damper import SpringDamper
 from movement_primitives.testing.simulation import UR5Simulation
 
 
+# 设置参数
 dt = 0.01
 
 sd = SpringDamper(n_dims=7, k=2.0, c=None, dt=dt, int_dt=0.001)
@@ -34,6 +37,7 @@ dP = np.asarray(desired_positions)
 V = np.asarray(velocities)
 dV = np.asarray(desired_velocities)
 
+# 绘图
 plot_dim = 1
 plt.figure(figsize=(10, 5))
 plt.subplot(131)

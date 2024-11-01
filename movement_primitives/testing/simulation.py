@@ -181,7 +181,7 @@ def get_absolute_path(urdf_path, model_prefix_path):
 
 
 class UR5Simulation(PybulletSimulation):
-    """PyBullet simulation of UR5 robot arm.
+    """PyBullet simulation of UR5 robot arm.  # UR5 机械臂的 PyBullet 仿真
 
     Parameters
     ----------
@@ -198,8 +198,8 @@ class UR5Simulation(PybulletSimulation):
         super(UR5Simulation, self).__init__(dt, gui, real_time)
 
         pybullet.setAdditionalSearchPath(pybullet_data.getDataPath())
-        self.plane = pybullet.loadURDF(
-            "plane.urdf", [0, 0, -1], useFixedBase=1)
+        # self.plane = pybullet.loadURDF(
+        #     "plane.urdf", [0, 0, -1], useFixedBase=1)
         self.robot = pybullet.loadURDF(
             "examples/data/urdf/ur5.urdf", [0, 0, 0], useFixedBase=1)
 

@@ -5,6 +5,7 @@ Change DMP frequencies
 
 In this example, we modify the size of a time step in a DMP and compare its
 effect.
+在本例中，我们修改了 DMP 中时间步长的大小，并比较了其影响。
 """
 print(__doc__)
 
@@ -13,13 +14,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 from movement_primitives.dmp import DMP
 
+# 设置参数
 start_y = np.array([0.0])
 goal_y = np.array([1.0])
 execution_time = 1.0
 
+# 创建DMP对象
 dmp = DMP(n_dims=1, execution_time=execution_time)
 dmp.configure(start_y=start_y, goal_y=goal_y)
 
+# 绘图
 plt.figure(figsize=(5, 8))
 ax = plt.subplot(111)
 ax.set_xlabel("Time")

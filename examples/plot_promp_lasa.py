@@ -74,9 +74,11 @@ def draw(T, X, idx, axes, shape_name):
     axes[h, w + 1].get_xaxis().set_visible(False)
 
 
+# 绘图长宽的手写曲线数量
 width = 2
 height = 5
 
+# 绘图
 fig, axes = plt.subplots(int(height), int(width * 2))  # ax:Axes or array of Axes
 
 for i in range(width * height):

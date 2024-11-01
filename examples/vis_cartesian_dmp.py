@@ -29,8 +29,8 @@ rotation_angle = np.deg2rad(45)
 n_steps = 201
 
 # src ='../examples/data/urdf/ur5.urdf'
-with open("../examples/data/urdf/ur5.urdf", "r") as f:
-    kin = Kinematics(f.read(), mesh_path="../examples/data/urdf/")  #  Kinematics:机器人运动学 mesh_path:用于搜索 URDF 中定义的网格的路径。如果设置为 "无"，网格将被忽略
+with open("examples/data/urdf/ur5.urdf", "r") as f:
+    kin = Kinematics(f.read(), mesh_path="examples/data/urdf/")  #  Kinematics:机器人运动学 mesh_path:用于搜索 URDF 中定义的网格的路径。如果设置为 "无"，网格将被忽略
 chain = kin.create_chain(
     ["ur5_shoulder_pan_joint", "ur5_shoulder_lift_joint", "ur5_elbow_joint",
      "ur5_wrist_1_joint", "ur5_wrist_2_joint", "ur5_wrist_3_joint"],

@@ -77,7 +77,7 @@ class PointToPointMovement(abc.ABC):
     def configure(
             self, t=None, start_y=None, start_yd=None, start_ydd=None,
             goal_y=None, goal_yd=None, goal_ydd=None):
-        """Set meta parameters.
+        """Set meta parameters.  # 设置元参数
 
         Parameters
         ----------

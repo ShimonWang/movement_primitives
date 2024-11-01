@@ -1,11 +1,13 @@
 """
 ===============================================
 Inverse and Forward Kinematics of a 6-DOF Robot
+6-DOF 机器人的逆运动学和正运动学
 ===============================================
 
 We define a simple trajectory in a robot's workspace, compute the forward
 kinematics, then the inverse kinematics and again the forward kinematics
 to check the consistency of forward and inverse kinematics.
+在机器人的工作空间中定义一个简单的轨迹，计算机器人的正运动学、逆运动学，然后再次计算正运动学，以检验机器人正、逆运动学的一致性。
 """
 print(__doc__)
 
@@ -90,15 +92,16 @@ Q[:, 3] = np.linspace(-0.5 * np.pi, 0.5 * np.pi, len(Q))
 Q[:, 4] = np.linspace(-0.5 * np.pi, 0.5 * np.pi, len(Q))
 Q[:, 5] = np.linspace(-0.5 * np.pi, 0.5 * np.pi, len(Q))
 
-H = chain.forward_trajectory(Q)
-random_state = np.random.RandomState(2)
-Q2 = chain.inverse_trajectory(H, Q[0], random_state=random_state)
-H2 = chain.forward_trajectory(Q2)
+H = chain.forward_trajectory(Q)  # 计算轨迹的正向运动学
+random_state = np.random.RandomState(2)  # 伪随机数生成器
+Q2 = chain.inverse_trajectory(H, Q[0], random_state=random_state)  # 计算轨迹的逆运动学
+H2 = chain.forward_trajectory(Q2)  # 再次计算轨迹的正运动学
 
+# 绘图
 plt.figure(figsize=(10, 5))
-ax = make_3d_axis(1, 121)
-traj = Trajectory(H, s=0.1)
-traj.add_trajectory(ax)
+ax = make_3d_axis(1, 121)  #  生成新的 3D 轴
+traj = Trajectory(H, s=0.1)  # 显示轨迹的 Matplotlib 艺术家 H:姿态序列由齐次矩阵表示；s:绘制坐标系的缩放比例
+traj.add_trajectory(ax)  # 将轨迹添加到 3D 轴上
 ax = make_3d_axis(1, 122)
 traj2 = Trajectory(H2, s=0.1)
 traj2.add_trajectory(ax)
