@@ -373,6 +373,8 @@ class DualCartesianDMP(WeightParametersMixin, DMPBase):
         Target forces for the forcing term are computed for the positions
         in a similar way as in :func:`DMP.imitate`. For the orientations
         we adapt this to handle quaternions adequately.
+        力项目标力的计算方法与 :func:`DMP.imitate` 中的方法类似。对于方向，
+        我们将对其进行调整，以充分处理四元数。
 
         Parameters
         ----------

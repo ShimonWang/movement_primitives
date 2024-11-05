@@ -52,7 +52,7 @@ class PybulletSimulation:
         pybullet.stepSimulation(physicsClientId=self.client_id)
 
     def sim_loop(self, n_steps=None):
-        """Run simulation loop.
+        """Run simulation loop.  # 运行仿真循环。
 
         Parameters
         ----------
@@ -112,18 +112,18 @@ def draw_transform(pose2origin, s, client_id, lw=1):
 
 
 def draw_pose(pose2origin, s, client_id, lw=1):
-    """Draw pose represented by position and quaternion.
+    """Draw pose represented by position and quaternion.  # 绘制由位置和四元数表示的姿势。
 
     Parameters
     ----------
     pose2origin : array-like, shape (7,)
-        Position and quaternion: (x, y, z, qw, qx, qy, qz)
+        Position and quaternion: (x, y, z, qw, qx, qy, qz)  # 位置和四元数
 
     s : float
-        Scale, length of the coordinate axes
+        Scale, length of the coordinate axes  # 坐标轴长度
 
     client_id : int
-        Physics client ID
+        Physics client ID  # 物理客户端 ID
 
     lw : int, optional (default: 1)
         Line width
@@ -455,7 +455,7 @@ class KinematicsChain:
 
 
 class RH5Simulation(PybulletSimulation):
-    """PyBullet simulation of RH5 humanoid robot.
+    """PyBullet simulation of RH5 humanoid robot.  # RH5 人形机器人的 PyBullet 仿真。
 
     Parameters
     ----------
@@ -591,11 +591,11 @@ class RH5Simulation(PybulletSimulation):
     def get_ee_state(self, return_velocity=False):
         left_ee_state = pybullet.getLinkState(
             self.robot, self.left_ee_link_index, computeLinkVelocity=1,
-            computeForwardKinematics=1, physicsClientId=self.client_id)
-        left_pos = left_ee_state[4]
-        left_rot = left_ee_state[5]
+            computeForwardKinematics=1, physicsClientId=self.client_id)  # 获取每个节点的质心的笛卡尔坐标和方位
+        left_pos = left_ee_state[4]  # URDF link frame中的世界坐标系中的位置 shape=(3,)
+        left_rot = left_ee_state[5]  # URDF link frame中的世界坐标系中的方向 shape=(4,)
         left_pos, left_rot = pybullet.multiplyTransforms(left_pos, left_rot, *self.inv_base_pose)
-        left_pose = _pytransform_pose(left_pos, left_rot)
+        left_pose = _pytransform_pose(left_pos, left_rot)  # (x, y, z, qw, qx, qy, qz)
 
         right_ee_state = pybullet.getLinkState(
             self.robot, self.right_ee_link_index, computeLinkVelocity=1,
@@ -618,7 +618,7 @@ class RH5Simulation(PybulletSimulation):
             return _pytransform_pose(pos, rot), np.hstack((vel, np.zeros(3)))
             """
         else:
-            return np.hstack((left_pose, right_pose))
+            return np.hstack((left_pose, right_pose))  # 按顺序水平堆叠数组（按列排列）
 
     def set_desired_ee_state(self, ee_state, position_control=False):
         q = self.inverse_kinematics(ee_state)
@@ -635,12 +635,24 @@ class RH5Simulation(PybulletSimulation):
         self.step()
 
     def goto_ee_state(self, ee_state, wait_time=1.0, text=None):
+        """
+
+        Parameters
+        ----------
+        ee_state : array, shape (7,)
+            末端执行器的状态：(x, y, z, qw, qx, qy, qz)
+
+        wait_time : float
+            等待时间
+
+        text :
+        """
         if text:
-            pos, rot = _pybullet_pose(ee_state)
+            pos, rot = _pybullet_pose(ee_state)  # 将姿势从 (x, y, z, qw, qx, qy, qz) 转换为 ((x, y, z), (qx, qy, qz, qw))
             self.write(pos, text)
-        q = self.inverse_kinematics(ee_state)
+        q = self.inverse_kinematics(ee_state)  # RH5 的逆运动学
         self.set_desired_joint_state(q, position_control=True)
-        self.sim_loop(int(wait_time / self.dt))
+        self.sim_loop(int(wait_time / self.dt))  # 运行仿真循环
 
     def step_through_cartesian(self, steppable, last_p, last_v, execution_time, closed_loop=False, coupling_term=None):
         p = self.get_ee_state(return_velocity=False)   # TODO v
