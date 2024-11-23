@@ -7,32 +7,32 @@ except ImportError:
 
 
 class ForcingTerm:
-    """Defines the shape of a DMP.
+    """Defines the shape of a DMP.  # 定义 DMP 的形状。
 
     Parameters
     ----------
     n_dims : int
-        State space dimensions.
+        State space dimensions.  # 状态空间维度。
 
     n_weights_per_dim : int, optional (default: 10)
-        Number of weights of the function approximator per dimension.
+        Number of weights of the function approximator per dimension.  # 每个维度的函数逼近器权重数。
 
     goal_t : float
-        Time at the end.
+        Time at the end.  # 结束时的时间
 
     start_t : float
-        Time at the start.
+        Time at the start.  # 开始时间
 
     overlap : float
-        Value at which radial basis functions overlap.
+        Value at which radial basis functions overlap.  # 径向基函数的重叠值。
 
     alpha_z : float
-        Value of the alpha parameter of the canonical system.
+        Value of the alpha parameter of the canonical system.  # 正则系统的alpha参数值
 
     Attributes
     ----------
     weights_ : array, shape (n_dims, n_weights_per_dim)
-        Weights of the forcing term.
+        Weights of the forcing term.  # 力项的权重
     """
     def __init__(self, n_dims, n_weights_per_dim, goal_t, start_t, overlap,
                  alpha_z):

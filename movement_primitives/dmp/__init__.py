@@ -42,4 +42,4 @@ __all__ = [
     "CouplingTermPos3DToPos3D", "CouplingTermDualCartesianPose",
     "CouplingTermDualCartesianDistance", "CouplingTermDualCartesianTrajectory",
     "canonical_system_alpha", "phase", "obstacle_avoidance_acceleration_2d",
-    "obstacle_avoidance_acceleration_3d"]
+    "obstacle_avoidance_acceleration_3d"]  # 用于定义对于from XXX import *时间要对外导出的符号，即要暴露的接口
