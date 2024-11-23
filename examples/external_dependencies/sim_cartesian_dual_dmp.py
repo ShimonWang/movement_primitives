@@ -20,7 +20,8 @@ desired_distance = pt.transform_from(  # right arm to left arm
 ct = CouplingTermDualCartesianPose(desired_distance=desired_distance, lf=(1.0, 0.0), k=1, c1=0.1, c2=10000)  # 双笛卡尔 DMP 的耦合相对姿势 lf=(1.0,0.0):左臂跟随右臂
 
 # 创建RH5机器人仿真对象
-rh5 = RH5Simulation(dt=dt, gui=True, real_time=False)
+# rh5 = RH5Simulation(dt=dt, gui=True, real_time=False)
+rh5 = RH5Simulation(dt=dt, gui=False, real_time=False)
 q0 = np.array([-1.57, 0.76, 0, -1.3, 0, 0, -0.55, 1.57, -0.76, 0, 1.3, 0, 0, -0.55])
 rh5.set_desired_joint_state(q0, position_control=True)
 rh5.sim_loop(int(1.0 / dt))

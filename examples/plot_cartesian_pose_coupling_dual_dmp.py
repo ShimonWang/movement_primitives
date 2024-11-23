@@ -47,23 +47,25 @@ rh5 = SimulationMockup(dt=dt)  # 开环运行步进程序
 
 Y = np.zeros((1001, 14))
 T = np.linspace(0, 1, len(Y))
-sigmoid = 0.5 * (np.tanh(1.5 * np.pi * (T - 0.5)) + 1.0)  # 双曲正切函数
+sigmoid = 0.5 * (np.tanh(1.5 * np.pi * (T - 0.5)) + 1.0)  # 双曲正切函数 sigmoid=0.5tanh(1.5pi*(T-0.5)+1)
 radius = 0.5
 
-circle1 = radius * np.cos(np.deg2rad(90) + np.deg2rad(90) * sigmoid)
-circle2 = radius * np.sin(np.deg2rad(90) + np.deg2rad(90) * sigmoid)
+circle1 = radius * np.cos(np.deg2rad(90) + np.deg2rad(90) * sigmoid)  # 0.5cos(pi/2+pi/2*sigmoid)
+circle2 = radius * np.sin(np.deg2rad(90) + np.deg2rad(90) * sigmoid)  # 0.5sin(pi/2+pi/2*sigmoid)
 # 替换Y0,1,2三列
 Y[:, 0] = circle1
 Y[:, 1] = 0.55
 Y[:, 2] = circle2
-R_three_fingers_front = pr.matrix_from_axis_angle([0, 0, 1, 0.5 * np.pi])  # 根据轴角计算旋转矩阵
-R_to_center_start = pr.matrix_from_axis_angle([1, 0, 0, np.deg2rad(0)])
+# 根据轴角计算旋转矩阵 R=a(x,y,z,angle)
+R_three_fingers_front = pr.matrix_from_axis_angle([0, 0, 1, 0.5 * np.pi])  # 前面三指的旋转矩阵，R(z,pi/2)
+R_to_center_start = pr.matrix_from_axis_angle([1, 0, 0, np.deg2rad(0)])  # 相对于中心起始点旋转矩阵，R(x,0)
 # introduces coupling error (default goal: -90; error at: -110)
-R_to_center_end = pr.matrix_from_axis_angle([1, 0, 0, np.deg2rad(-110)])
-q_start = pr.quaternion_from_matrix(R_three_fingers_front.dot(R_to_center_start))  # 根据旋转矩阵计算四元数
+R_to_center_end = pr.matrix_from_axis_angle([1, 0, 0, np.deg2rad(-110)])  # 相对于中心结束点旋转矩阵，R(x,-110/180)
+# 根据旋转矩阵计算四元数,q(w,x,y,z)=R
+q_start = pr.quaternion_from_matrix(R_three_fingers_front.dot(R_to_center_start))
 q_end = -pr.quaternion_from_matrix(R_three_fingers_front.dot(R_to_center_end))
 for i, t in enumerate(T):
-    Y[i, 3:7] = pr.quaternion_slerp(q_start, q_end, t)
+    Y[i, 3:7] = pr.quaternion_slerp(q_start, q_end, t)  # pr.quaternion_slerp 球面线性插值
 
 circle1 = radius * np.cos(np.deg2rad(270) + np.deg2rad(90) * sigmoid)
 circle2 = radius * np.sin(np.deg2rad(270) + np.deg2rad(90) * sigmoid)

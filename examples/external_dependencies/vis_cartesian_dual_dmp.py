@@ -6,6 +6,7 @@ import pytransform3d.visualizer as vis
 from pytransform3d.urdf import UrdfTransformManager
 from movement_primitives.testing.simulation import SimulationMockup
 
+# 设置参数
 dt = 0.001
 int_dt = 0.001
 execution_time = 1.0
@@ -54,6 +55,7 @@ for i, t in enumerate(sigmoid):
     Y[i, 10:] = pr.quaternion_slerp(q_start, q_end, t)
 
 
+# 创建DualCartesianDMP对象
 dmp = DualCartesianDMP(
     execution_time=execution_time, dt=dt,
     n_weights_per_dim=10, int_dt=int_dt, p_gain=0.0)
