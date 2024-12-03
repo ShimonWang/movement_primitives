@@ -8,8 +8,8 @@ from movement_primitives.testing.simulation import RH5Simulation, draw_pose
 # 设置参数
 dt = 0.0005
 execution_time = 1.0
-plot = False  # 绘图标识
-# plot = True # 绘图标识
+# plot = False  # 绘图标识
+plot = True # 绘图标识
 
 #ct = CouplingTermDualCartesianDistance(desired_distance=0.2, lf=(1.0, 0.0), k=1, c1=0.1, c2=1000)
 #ct = CouplingTermDualCartesianOrientation(desired_distance=np.deg2rad(25), lf=(1.0, 0.0), k=0.1)
@@ -17,7 +17,8 @@ desired_distance = pt.transform_from(  # right arm to left arm
     R=pr.active_matrix_from_intrinsic_euler_zyx([np.pi, 0, np.deg2rad(15)]),
     p=np.array([0.0, -0.3, 0.0])
 )  # 根据旋转变换矩阵和平移变换矩阵得到齐次变换矩阵,active_matrix_from_intrinsic_euler_zyx:从固有的zyx Cardan角计算旋转矩阵
-ct = CouplingTermDualCartesianPose(desired_distance=desired_distance, lf=(1.0, 0.0), k=1, c1=0.1, c2=10000)  # 双笛卡尔 DMP 的耦合相对姿势 lf=(1.0,0.0):左臂跟随右臂
+# ct = CouplingTermDualCartesianPose(desired_distance=desired_distance, lf=(1.0, 0.0), k=1, c1=0.1, c2=10000)  # 双笛卡尔 DMP 的耦合相对姿势 lf=(1.0,0.0):左臂跟随右臂
+ct = CouplingTermDualCartesianPose(desired_distance=desired_distance, lf=(1.0, 0.0), k=1, c1=0.1, c2=0.1)  # 双笛卡尔 DMP 的耦合相对姿势 lf=(1.0,0.0):左臂跟随右臂
 
 # 创建RH5机器人仿真对象
 # rh5 = RH5Simulation(dt=dt, gui=True, real_time=False)
@@ -85,7 +86,12 @@ for coupling_term in [ct, None]:
             plt.plot(np.linspace(0, execution_time, len(dP)), dP[:, plot_dim] - dP[:, 7 + plot_dim], label="Desired %d" % plot_dim, c="g", ls="--")
             D = P[:, plot_dim] - P[:, 7 + plot_dim]
             plt.ylim((min(D - 0.05), max(D) + 0.05))
-        plt.legend()
-        plt.show()
+
+
+    # plt.legend()
+    plt.legend(["Demo", "Actual", "Desired"], loc="lower right", fontsize=8)
+    plt.suptitle("Cartesian Dual DMP" )
+    plt.show()
+
 
 rh5.sim_loop()
